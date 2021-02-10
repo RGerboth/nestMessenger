@@ -32,7 +32,7 @@ export class MessagesService {
     }
 
     async findBySender(
-        id: string,
+        name: string,
         recipient: string,
         limit: string,
         offset: string,
@@ -47,7 +47,7 @@ export class MessagesService {
         const providedDateTo = dateTo ? moment(dateTo).add(7, 'hours') : moment().add(7, 'hours');
         const messages = getRepository(Message)
             .createQueryBuilder('message')
-            .where('message.from = :name', { name: id })
+            .where('message.from = :name', { name: name })
             .andWhere('message.to = :to', { to: recipient })
             .andWhere('message.created >= :fromDate', { fromDate: providedDateFrom })
             .andWhere('message.created <= :toDate', { toDate: providedDateTo })
@@ -59,7 +59,7 @@ export class MessagesService {
     }
 
     async findByReceiver(
-        id: string,
+        name: string,
         sender: string,
         limit: string,
         offset: string,
@@ -74,7 +74,7 @@ export class MessagesService {
         const providedDateTo = dateTo ? moment(dateTo).add(7, 'hours') : moment().add(7, 'hours');
         const messages = getRepository(Message)
             .createQueryBuilder('message')
-            .where('message.to = :name', { name: id })
+            .where('message.to = :name', { name: name })
             .andWhere('message.from = :from', { from: sender })
             .andWhere('message.created >= :fromDate', { fromDate: providedDateFrom })
             .andWhere('message.created <= :toDate', { toDate: providedDateTo })

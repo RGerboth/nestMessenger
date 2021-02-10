@@ -12,16 +12,16 @@ export class MessagesController {
         return this.messagesService.findAll(limit, offset, dateFrom, dateTo);
     }
 
-    @Get('/bySenderId/:id')
-    findBySender(@Param('id') id: string, @Query() query) {
+    @Get('/bySenderName/:name')
+    findBySender(@Param('name') name: string, @Query() query) {
         const { recipient, limit, offset, dateFrom, dateTo } = query;
-        return this.messagesService.findBySender(id, recipient, limit, offset, dateFrom, dateTo);
+        return this.messagesService.findBySender(name, recipient, limit, offset, dateFrom, dateTo);
     }
 
-    @Get('/byReceiverId/:id')
-    findByReceiver(@Param('id') id: string, @Query() query) {
+    @Get('/byReceiverName/:name')
+    findByReceiver(@Param('name') name: string, @Query() query) {
         const { sender, limit, offset, dateFrom, dateTo } = query;
-        return this.messagesService.findByReceiver(id, sender, limit, offset, dateFrom, dateTo);
+        return this.messagesService.findByReceiver(name, sender, limit, offset, dateFrom, dateTo);
     }
 
     @Post()
