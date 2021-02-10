@@ -4,11 +4,28 @@ Nest Messenger store-and-forward messaging API written in TypeScript for Node/Ex
 
 ## Nest.js
 
-[Nest.js](https://nestjs.com/) Nest (NestJS) is a framework for building efficient, scalable Node.js server-side applications. It uses progressive JavaScript, is built with and fully supports TypeScript (yet still enables developers to code in pure JavaScript) and combines elements of OOP (Object Oriented Programming), FP (Functional Programming), and FRP (Functional Reactive Programming).
+[Nest.js](https://nestjs.com/) Nest (NestJS) is a framework for building efficient, scalable Node.js server-side applications. It uses progressive JavaScript, is built with and fully supports TypeScript and combines elements of OOP (Object Oriented Programming), FP (Functional Programming), and FRP (Functional Reactive Programming).
 
 ## Installation
 
+
 ### Postgres Database
+Nest Messenger stores messages in a single table in Postgres. The Postgres 
+
+**Clone the repository**
+`git clone https://github.com/RGerboth/nestMessenger.git`
+
+**Run NPM Install**
+`npm i`
+
+**Switch to branch postgres**
+`git checkout postgres`
+
+**Start**
+npm run start
+
+**Confirm**
+Navigate to http://localhost:3000/api
 
 CREATE DATABASE nest_messenger;
 
