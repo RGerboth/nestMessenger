@@ -10,8 +10,26 @@ Nest Messenger store-and-forward messaging API written in TypeScript for Node/Ex
 
 
 ### Postgres Database
-Nest Messenger stores messages in a single table in Postgres. The Postgres 
+Nest Messenger stores messages in a single table in Postgres. There are two options for running Postgres. 
 
+**Docker**
+Nest Messenger includes a docker-compose.yml file. With Docker running execute the command: `docker-compose up` to start the Docker Postgres image with database name `nest_messenger` available on port `5432`. 
+
+**Local**
+If you are running Postgres locally, create a database named `nest_messenger` and ensure your login credentials match the credentials in app.module.ts
+
+These are the default values which you can change to match your local database environment: 
+`            
+    type: 'postgres',
+    host: 'localhost',
+    port: 5432,
+    username: 'postgres',
+    password: 'pass123',
+    database: 'nest_messenger',
+    autoLoadEntities: true,
+    synchronize: true`
+
+## Clone and start
 **Clone the repository**
 `git clone https://github.com/RGerboth/nestMessenger.git`
 
