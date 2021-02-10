@@ -1,39 +1,102 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { getRepository, Repository } from 'typeorm';
+import { CreateMessageDto } from './dto/create-message.dto';
+import { UpdateMessageDto } from './dto/update-message.dto';
 // import { stringify } from 'querystring';
 import { Message } from './entities/message.entity';
+import * as moment from 'moment';
 
 @Injectable()
 export class MessagesService {
-    private messages: Message[] = [
-        {
-            id: 123,
-            from: 'Robert',
-            to: 'Steve',
-            message: 'lunch?',
-        },
-    ];
+    constructor(
+        @InjectRepository(Message) private readonly messageRepository: Repository<Message>
+    ) {}
 
-    findAll(limit: string, offset: string, dateFrom: Date, dateTo: Date) {
-        return `These are your messages, sir. ${limit}, ${offset}`;
+    async findAll(limit: string, offset: string, dateFrom: Date, dateTo: Date) {
+        const providedLimit = +limit || 100;
+        const providedOffset = +offset || 0;
+        const providedDateFrom = dateFrom
+            ? moment(dateFrom).subtract(7, 'hours')
+            : moment().subtract(30, 'days').subtract(7, 'hours');
+        const providedDateTo = dateTo ? moment(dateTo).add(7, 'hours') : moment().add(7, 'hours');
+        const messages = getRepository(Message)
+            .createQueryBuilder('message')
+            .where('message.created >= :fromDate', { fromDate: providedDateFrom })
+            .andWhere('message.created <= :toDate', { toDate: providedDateTo })
+            .orderBy('message.created')
+            .limit(providedLimit)
+            .offset(providedOffset)
+            .getMany();
+        return messages;
     }
 
-    findBySender(id: string, limit: string, offset: string, dateFrom: Date, dateTo: Date) {
-        return `These are your sent messages, #${id}. ${limit}, ${offset}, ${dateFrom}, ${dateTo}`;
+    async findBySender(
+        id: string,
+        recipient: string,
+        limit: string,
+        offset: string,
+        dateFrom: Date,
+        dateTo: Date
+    ) {
+        const providedLimit = +limit || 100;
+        const providedOffset = +offset || 0;
+        const providedDateFrom = dateFrom
+            ? moment(dateFrom).subtract(7, 'hours')
+            : moment().subtract(30, 'days').subtract(7, 'hours');
+        const providedDateTo = dateTo ? moment(dateTo).add(7, 'hours') : moment().add(7, 'hours');
+        const messages = getRepository(Message)
+            .createQueryBuilder('message')
+            .where('message.from = :name', { name: id })
+            .andWhere('message.to = :to', { to: recipient })
+            .andWhere('message.created >= :fromDate', { fromDate: providedDateFrom })
+            .andWhere('message.created <= :toDate', { toDate: providedDateTo })
+            .orderBy('message.created')
+            .limit(providedLimit)
+            .offset(providedOffset)
+            .getMany();
+        return messages;
     }
 
-    findByReceiver(id: string, limit: string, offset: string, dateFrom: Date, dateTo: Date) {
-        return `These are your incoming messages, #${id}. ${limit}, ${offset}, ${dateFrom}, ${dateTo}`;
+    async findByReceiver(
+        id: string,
+        sender: string,
+        limit: string,
+        offset: string,
+        dateFrom: Date,
+        dateTo: Date
+    ) {
+        const providedLimit = +limit || 100;
+        const providedOffset = +offset || 0;
+        const providedDateFrom = dateFrom
+            ? moment(dateFrom).subtract(7, 'hours')
+            : moment().subtract(30, 'days').subtract(7, 'hours');
+        const providedDateTo = dateTo ? moment(dateTo).add(7, 'hours') : moment().add(7, 'hours');
+        const messages = getRepository(Message)
+            .createQueryBuilder('message')
+            .where('message.to = :name', { name: id })
+            .andWhere('message.from = :from', { from: sender })
+            .andWhere('message.created >= :fromDate', { fromDate: providedDateFrom })
+            .andWhere('message.created <= :toDate', { toDate: providedDateTo })
+            .orderBy('message.created')
+            .limit(providedLimit)
+            .offset(providedOffset)
+            .getMany();
+        return messages;
     }
 
-    addMessage(from: string, to: string, message: string) {
-        return `Sent Message From: ${from} To: ${to} "${message}" `;
+    async addMessage(createMessageDto: CreateMessageDto) {
+        const message = this.messageRepository.create(createMessageDto);
+        return this.messageRepository.save(message);
     }
 
-    updateMessage(id: number, from: string, to: string, message: string) {
-        return `Updated Message ID: ${id} From: ${from} To: ${to} "${message}" `;
+    async updateMessage(id: string, updateMessageDto: UpdateMessageDto) {
+        const message = await this.messageRepository.preload({ id: +id, ...updateMessageDto });
+        return this.messageRepository.save(message);
     }
 
-    deleteMessage(id: string) {
-        return `Deleted message id ${id}`;
+    async deleteMessage(id: string) {
+        const message = await this.messageRepository.findOne(+id);
+        return this.messageRepository.remove(message);
     }
 }
