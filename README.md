@@ -16,7 +16,7 @@ CREATE DATABASE nest_messenger;
 
 The Nest Messages API includes all traditional CRUD operations.
 
-To view the API documents via Swagger navigate to [Nest Messenger API]http://localhost:3000/api
+To view the API documents via Swagger navigate to [Nest Messenger API](http://localhost:3000/api)
 
 ### POST
 
