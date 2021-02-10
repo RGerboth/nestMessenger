@@ -22,12 +22,10 @@ Nest Messenger stores messages in a single table in Postgres. The Postgres
 `git checkout postgres`
 
 **Start**
-npm run start
+`npm run start`
 
 **Confirm**
 Navigate to http://localhost:3000/api
-
-CREATE DATABASE nest_messenger;
 
 ## API Reference
 
