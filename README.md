@@ -16,7 +16,7 @@ Nest Messenger stores messages in a single table in Postgres. There are two opti
 Nest Messenger includes a docker-compose.yml file. With Docker running execute the command: `docker-compose up` to start the Docker Postgres image with database name `nest_messenger` available on port `5432`. 
 
 **Local**
-If you are running Postgres locally, create a database named `nest_messenger` and ensure your login credentials match the credentials in app.module.ts
+If you are running Postgres locally, create a database named `nest_messenger` and update the login credentials in `app.module.ts` as needed for your local environment.
 
 These are the default values which you can change to match your local database environment: 
 `            
