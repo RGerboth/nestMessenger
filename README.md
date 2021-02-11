@@ -8,15 +8,30 @@ Nest Messenger store-and-forward messaging API written in TypeScript for Node/Ex
 
 ## Installation
 
+### Clone
+**Clone the repository**
+`git clone https://github.com/RGerboth/nestMessenger.git`
+
+**Change into the nestMessenger/nest-messenger Directory**
+`cd nestMessenger/nest-messenger`
+
+**Switch to branch postgres**
+`git checkout postgres`
+
+**Pull the latest changes**
+`git pull`
+
+**Run NPM Install**
+`npm i`
 
 ### Postgres Database
 Nest Messenger stores messages in a single table in Postgres. There are two options for running Postgres. 
 
 **Docker**
-Nest Messenger includes a docker-compose.yml file. With Docker running execute the command: `docker-compose up` to start the Docker Postgres image with database name `nest_messenger` available on port `5432`. 
+Nest Messenger includes a docker-compose.yml file. With [Docker](https://www.docker.com/) running execute the command: `docker-compose up -d` to start the Docker Postgres image with database name `nest_messenger` available on port `5432`. 
 
 **Local**
-If you are running Postgres locally, create a database named `nest_messenger` and update the login credentials in `app.module.ts` as needed for your local environment.
+If you are running Postgres locally, either use an existing instance of a database called `postgres` or create a database named `nest_messenger` and update the login credentials in `app.module.ts` as needed for your local environment.
 
 These are the default values which you can change to match your local database environment: 
 `            
@@ -25,19 +40,9 @@ These are the default values which you can change to match your local database e
     port: 5432,
     username: 'postgres',
     password: 'pass123',
-    database: 'nest_messenger',
+    database: 'postgres',
     autoLoadEntities: true,
     synchronize: true`
-
-## Clone and start
-**Clone the repository**
-`git clone https://github.com/RGerboth/nestMessenger.git`
-
-**Run NPM Install**
-`npm i`
-
-**Switch to branch postgres**
-`git checkout postgres`
 
 **Start**
 `npm run start`
