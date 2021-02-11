@@ -13,7 +13,7 @@ import { MessagesModule } from './messages/messages.module';
             port: 5432,
             username: 'postgres',
             password: 'pass123',
-            database: 'nest_messenger',
+            database: 'postgres',
             autoLoadEntities: true,
             synchronize: true,
         }),
