@@ -1,6 +1,6 @@
 # nestMessenger
 
-Nest Messenger store-and-forward messaging API written in TypeScript for Node/Express in the Nest.js framework with data storage in Postgres using TypeORM.
+Nest Messenger is a store-and-forward messaging API written in TypeScript for Node/Express in the Nest.js framework with data storage in Postgres using TypeORM.
 
 ## Nest.js
 
