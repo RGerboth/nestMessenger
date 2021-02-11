@@ -172,3 +172,16 @@ Route: /messages/byReceiverName/:name
         dateTo (optional)
 
 Example: `/messages/byReceiverName/Robert?sender=Steve&limit=1&offset=1&dateFrom=2020-12-30&dateTo=2021-02-10`
+
+
+
+## Testing
+
+The Nest Messages API includes Jest.
+
+Unit and module tests: `npm run test`
+Code coverage tests: `npm run test:cov`
+
+Due to time constraints I have not completed all unit tests for this project. 
+
+Also, Jest is incompatible with older Node versions. If you have any trouble running the tests I can send along a couple of screen shots of the results. 
