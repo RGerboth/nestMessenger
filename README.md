@@ -31,7 +31,7 @@ Nest messenger runs on a Node/Express foundation. In order to ensure compatibili
 Nest Messenger stores messages in a single table in Postgres. There are two options for running Postgres. 
 
 **Docker**
-Nest Messenger includes a docker-compose.yml file. With [Docker](https://www.docker.com/) running execute the command: `docker-compose up -d` to start the Docker Postgres image with database name `nest_messenger` available on port `5432`. 
+Nest Messenger includes a docker-compose.yml file. With [Docker](https://www.docker.com/) running execute the command: `docker-compose up -d` to start the Docker Postgres image with database name `postgres` available on port `5432`. 
 
 **Local**
 If you are running Postgres locally, either use an existing instance of a database called `postgres` or create a database named `nest_messenger` and update the login credentials in `app.module.ts` as needed for your local environment.
