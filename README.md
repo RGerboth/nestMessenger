@@ -19,7 +19,7 @@ Nest Messenger is a store-and-forward messaging API written in TypeScript for No
 `git checkout postgres`
 
 **Pull the latest changes**
-`git pull`
+`git pull origin postgres`
 
 **Node Version**
 Nest messenger runs on a Node/Express foundation. In order to ensure compatibility with the latest updates I recommend running Node version [15.x](https://nodejs.org/en/about/releases/). Installation instructions can be found at [Download Node](https://nodejs.org/en/download/)
